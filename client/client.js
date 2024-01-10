@@ -32,13 +32,15 @@ app.put('/client/:id', authClient, async (req, res) => {
 });
 
 app.delete('/client/:id', authClient, async (req, res) => {
-    await Client.update({
-        status: "DELETE", where: {
+    await Client.destroy({
+        where: {
             id: req.params.id
-        }
+        },
+        individualHooks: true  // Asegura que los ganchos de Sequelize se ejecuten correctamente
     });
 
     res.send({ status: "success" });
 });
+
 
 export default app;
