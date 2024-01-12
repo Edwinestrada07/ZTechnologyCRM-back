@@ -6,14 +6,14 @@ import ClientRouter from './client/client.js';
 
 const app = express();
 
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: '*' })); 
 app.use(express.json());
 
 app.use(AuthRouter);
 app.use(ClientRouter);
 
 app.get('/admin', authAdmin, (req, res) => {
-    res.send(req.user);
+    res.send(req.user); 
 });
 
 app.listen(4000);
