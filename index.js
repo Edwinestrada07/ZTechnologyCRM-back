@@ -3,6 +3,7 @@ import cors from 'cors';
 import AuthRouter from './auth/auth.js';
 import { authAdmin, authClient } from './utils/auth.utils.js';
 import ClientRouter from './client/client.js'; 
+import ProductRouter from './product/product.js';
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(express.json());
 
 app.use(AuthRouter);
 app.use(ClientRouter);
+app.use(ProductRouter);
 
 app.get('/admin', authAdmin, (req, res) => {
     res.send(req.user); 

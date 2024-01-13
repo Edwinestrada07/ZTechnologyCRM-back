@@ -15,7 +15,7 @@ app.get('/client', authClient, async (req, res) => {
 })
 
 app.post('/client', authClient, async (req, res) => {
-    const client = await Client.create(req.body);
+    const client = await Client.create(req.body); 
     client.save();
 
     res.send({ status: "success" });
@@ -28,7 +28,7 @@ app.put('/client/:id', authClient, async (req, res) => {
         }
     });
 
-    res.send({ status: "success" });
+    res.send({ status: "success" }); 
 });
 
 app.delete('/client/:id', authClient, async (req, res) => {
