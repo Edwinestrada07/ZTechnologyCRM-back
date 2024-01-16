@@ -10,7 +10,10 @@ class User extends Model {
 User.init({
     email: DataTypes.TEXT,
     password: DataTypes.TEXT,
-    rol: DataTypes.ENUM(['CLIENT', 'ADMIN']),
+    status: {
+        type: DataTypes.ENUM(['ACTIVE', 'DELETE']), 
+        defaultValue: 'ACTIVE'
+    },
 }, {
     sequelize,
     modelName: 'User'
