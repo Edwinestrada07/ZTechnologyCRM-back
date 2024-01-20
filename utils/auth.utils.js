@@ -1,7 +1,7 @@
 import User from "../user/user.model.js";
 import jwt from "jsonwebtoken";
 
-function authClient(req, res, next) {
+function validateToken(req, res, next) {
     const token = req.headers['authorization'];
 
     if (!token) {
@@ -43,5 +43,5 @@ async function authAdmin(req, res, next) {
 
 export {
     authAdmin,
-    authClient
+    validateToken 
 }

@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import AuthRouter from './auth/auth.js';
-import { authAdmin, authClient } from './utils/auth.utils.js';
 import ClientRouter from './client/client.js'; 
 import ProductRouter from './product/product.js';
 import UserRouter from './user/user.js';
@@ -15,10 +14,6 @@ app.use(AuthRouter);
 app.use(ClientRouter);
 app.use(ProductRouter);
 app.use(UserRouter)
-
-app.get('/admin', authAdmin, (req, res) => {
-    res.send(req.user); 
-});
 
 app.listen(4000);
 

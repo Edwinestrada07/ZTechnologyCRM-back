@@ -8,8 +8,13 @@ class User extends Model {
 }
 
 User.init({
+    name: DataTypes.TEXT,
     email: DataTypes.TEXT,
     password: DataTypes.TEXT,
+    role: {
+        type: DataTypes.ENUM(['ADMIN', 'GESTOR']), 
+        defaultValue: 'GESTOR'
+    },
     status: {
         type: DataTypes.ENUM(['ACTIVE', 'DELETE']), 
         defaultValue: 'ACTIVE'

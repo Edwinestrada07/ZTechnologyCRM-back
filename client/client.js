@@ -1,10 +1,10 @@
 import Express from 'express';
 import Client from './client.model.js';
-import { authAdmin, authClient } from '../utils/auth.utils.js';
+import { validateToken } from '../utils/auth.utils.js';
 
 const app = Express.Router();
 
-app.get('/client', authClient, async (req, res) => {
+app.get('/client', validateToken, async (req, res) => {
     const client = await Client.findAll({
         where: {
             status: "ACTIVE",
@@ -14,14 +14,14 @@ app.get('/client', authClient, async (req, res) => {
     res.send(client);
 })
 
-app.post('/client', authClient, async (req, res) => {
+app.post('/client', validateToken, async (req, res) => {
     const client = await Client.create(req.body); 
     client.save();
 
     res.send({ status: "success" });
 });
 
-app.put('/client/:id', authClient, async (req, res) => {
+app.put('/client/:id', validateToken, async (req, res) => {
     await Client.update(req.body, {
         where: {
             id: req.params.id
@@ -31,7 +31,7 @@ app.put('/client/:id', authClient, async (req, res) => {
     res.send({ status: "success" }); 
 });
 
-app.delete('/client/:id', authClient, async (req, res) => {
+app.delete('/client/:id', validateToken, async (req, res) => {
     await Client.destroy({
         where: {
             id: req.params.id
