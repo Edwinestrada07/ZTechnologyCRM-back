@@ -1,4 +1,4 @@
-import { DataTypes, Model } from "sequelize";
+import { BelongsTo, DataTypes, Model } from "sequelize";
 import sequelize from "../connect.js";
 
 class Product extends Model {

@@ -1,18 +1,51 @@
 import Express from 'express';
 import Product from './product.model.js';
 import { validateToken } from '../utils/auth.utils.js';
+import { Op } from "sequelize"
 
 const app = Express.Router();
 
 app.get('/product', validateToken, async (req, res) => {
-    const product = await Product.findAll({
-        where: {
-            status: "ACTIVE",  
+    try {
+        const { name } = req.query
+        console.log("query name", name)
+
+        const conditions = {}
+        conditions.status = "ACTIVE"
+
+        if(name) {
+            conditions.name = { [Op.iLike]: `%${name}%` }
         }
-    });
+
+        const product = await Product.findAll({
+            where: conditions
+        });
+    
+        res.send(product) 
+        
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' })
+    }
+})
+
+app.get('/product/:id', validateToken, async (req, res) => {
+    const product = await Product.findOne({
+        where: {
+            status: "ACTIVE",
+            id: req.params.id  
+        }
+    })
+
+    if ( !product ) {
+        return res.status(200).json({
+            msg: `El producto con el siguiente id ${ req.params.id }, no existe`
+        });
+    }
 
     res.send(product); 
 })
+
+
 
 app.post('/product', validateToken, async (req, res) => {
     const product = await Product.create(req.body); 

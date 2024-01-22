@@ -29,7 +29,7 @@ async function authAdmin(req, res, next) {
 
     const user = await User.findByPk(objectToken.id);
 
-    if(user.rol !== 'ADMIN') {
+    if(user.role !== 'ADMIN') {
         res.status(403).send('User is not a admin');
         return;
     }
