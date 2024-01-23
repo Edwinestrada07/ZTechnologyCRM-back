@@ -1,15 +1,47 @@
 import Express from 'express';
 import Client from './client.model.js';
 import { validateToken } from '../utils/auth.utils.js';
+import { Op } from "sequelize"
 
 const app = Express.Router();
 
 app.get('/client', validateToken, async (req, res) => {
-    const client = await Client.findAll({
+    try {
+        const { name } = req.query;
+        console.log("query name ", name)
+
+        const conditions = {}
+        conditions.status = "ACTIVE"
+
+        if(name) {
+            conditions.name = { [Op.iLike]: `%${name}%` }
+        }
+
+        const client = await Client.findAll({
+            where: conditions
+        })
+    
+        res.send(client)
+
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+    
+})
+
+app.get('/client/:id', validateToken, async (req, res) => {
+    const client = await Client.findOne({
         where: {
             status: "ACTIVE",
+            id: req.params.id
         }
     });
+
+    if ( !client ) {
+        return res.status(200).json({
+            msg: `El cliente con el siguiente id ${ req.params.id }, no existe`
+        });
+    }
 
     res.send(client);
 })

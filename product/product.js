@@ -7,8 +7,8 @@ const app = Express.Router();
 
 app.get('/product', validateToken, async (req, res) => {
     try {
-        const { name } = req.query
-        console.log("query name", name)
+        const { name } = req.query;
+        console.log("query name ", name)
 
         const conditions = {}
         conditions.status = "ACTIVE"
@@ -19,12 +19,12 @@ app.get('/product', validateToken, async (req, res) => {
 
         const product = await Product.findAll({
             where: conditions
-        });
+        })
     
-        res.send(product) 
-        
+        res.send(product)
+
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' })
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 })
 
@@ -44,8 +44,6 @@ app.get('/product/:id', validateToken, async (req, res) => {
 
     res.send(product); 
 })
-
-
 
 app.post('/product', validateToken, async (req, res) => {
     const product = await Product.create(req.body); 

@@ -13,7 +13,7 @@ app.post('/login', async (req, res) => {
     if (user.getPasswordEncrypt() === req.body.password) {
         const token = jwt.sign({ id: user.id }, '3de113c0-757c-45be-a5ab-238221699cd2');
 
-        res.send({ token, rol: user.rol, email: user.email });
+        res.send({ token, role: user.role, email: user.email });
     } else {
         res.status(400).send('error');
     }
