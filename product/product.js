@@ -1,9 +1,9 @@
-import Express from 'express';
-import Product from './product.model.js';
-import { validateToken } from '../utils/auth.utils.js';
+import Express from 'express'
+import Product from './product.model.js'
+import { validateToken } from '../utils/auth.utils.js'
 import { Op } from "sequelize"
 
-const app = Express.Router();
+const app = Express.Router()
 
 app.get('/product', validateToken, async (req, res) => {
     try {
@@ -50,7 +50,7 @@ app.post('/product', validateToken, async (req, res) => {
     product.save();
 
     res.send({ status: "success", product });
-});
+})
 
 app.put('/product/:id', validateToken, async (req, res) => {
     const product = await Product.update(req.body, {
@@ -60,7 +60,7 @@ app.put('/product/:id', validateToken, async (req, res) => {
     });
 
     res.send({ status: "success", product });
-});
+})
 
 app.delete('/product/:id', validateToken, async (req, res) => {
     await Product.destroy({
@@ -71,7 +71,7 @@ app.delete('/product/:id', validateToken, async (req, res) => {
     });
 
     res.send({ status: "success" });
-});
+})
 
 
 export default app;

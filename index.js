@@ -1,19 +1,21 @@
-import express from 'express';
-import cors from 'cors';
-import AuthRouter from './auth/auth.js';
-import ClientRouter from './client/client.js'; 
-import ProductRouter from './product/product.js';
-import UserRouter from './user/user.js';
+import express from 'express'
+import cors from 'cors'
+import AuthRouter from './auth/auth.js'
+import ClientRouter from './client/client.js';
+import ProductRouter from './product/product.js'
+import UserRouter from './user/user.js'
+import CartRouter from './cart/cart.js'
 
-const app = express();
+const app = express()
 
-app.use(cors({ origin: '*' })); 
-app.use(express.json());
+app.use(cors({ origin: '*' }));
+app.use(express.json())
 
-app.use(AuthRouter); 
-app.use(ClientRouter);
-app.use(ProductRouter);
+app.use(AuthRouter);
+app.use(ClientRouter)
+app.use(ProductRouter)
 app.use(UserRouter)
+app.use(CartRouter)
 
 app.listen(4000);
 
