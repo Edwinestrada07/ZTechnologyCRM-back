@@ -3,7 +3,7 @@ import sequelize from "../connect.js";
 
 class User extends Model {
     getPasswordEncrypt() {
-        return this.password;
+        return this.password; 
     }
 }
 
