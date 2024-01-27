@@ -4,9 +4,25 @@ import Cart from './cart.model.js'
 const app = Express.Router()
 
 app.get('/cart', async (req, res) => {
+<<<<<<< HEAD
     
     const cart = await Cart.findAll()
     res.send(cart)
+=======
+    try {
+      const cart = await Cart.findAll({
+        where: {
+            status: "ACTIVE",
+            id: req.params.id  
+        }
+      })
+  
+      res.send(cart)
+
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error'  })
+    }
+>>>>>>> 8a13d827c072d7516c5dedeb3c35026cec609f8b
 })
 
 app.get('/cart/:id', async (req, res) => {
