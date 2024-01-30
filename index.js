@@ -1,10 +1,10 @@
 import express from 'express'
 import cors from 'cors'
 import AuthRouter from './auth/auth.js'
-import ClientRouter from './client/client.js';
+import ClientRouter from './client/client.js'
 import ProductRouter from './product/product.js'
 import UserRouter from './user/user.js'
-import CartRouter from './cart/cart.js'
+import InvoiceRouter from './invoice/invoice.js' 
 
 const app = express()
 
@@ -15,7 +15,7 @@ app.use(AuthRouter);
 app.use(ClientRouter)
 app.use(ProductRouter)
 app.use(UserRouter)
-app.use(CartRouter)
+app.use(InvoiceRouter)
 
 app.listen(4000);
 

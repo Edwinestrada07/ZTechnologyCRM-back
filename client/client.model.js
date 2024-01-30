@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../connect.js";
+import User from "../user/user.model.js"
 
 class Client extends Model {
     getPasswordEncrypt() {
@@ -20,6 +21,10 @@ Client.init({
     sequelize,
     modelName: 'Client'
 });
+
+//Relations (Un cliente pertenece a un usuario)
+/*Client.belongsTo(User)
+User.hasMany(Client)*/
 
 Client.sync({ alter: true });
 
