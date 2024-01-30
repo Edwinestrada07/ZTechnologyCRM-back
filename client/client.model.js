@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../connect.js";
-import User from "../user/user.model.js"
+//import User from "../user/user.model.js"
 
 class Client extends Model {
     getPasswordEncrypt() {
