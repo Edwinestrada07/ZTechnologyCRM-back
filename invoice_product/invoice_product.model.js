@@ -7,15 +7,16 @@ class Invoice_Product extends Model {
 }
 
 Invoice_Product.init({
-    cant: DataTypes.FLOAT,  
+    cant: DataTypes.FLOAT,
+    price: DataTypes.FLOAT,
 }, {
     sequelize,
     modelName: 'Invoice_Product'
 });
 
 // Relation (Muchos a muchos) una factura puede contener muchos product y muchos products pueden estar en muchas facturas 
-Invoice.belongsToMany(Product, { through: 'Invoice_Product', foreignKey: 'invoiceId' });
-Product.belongsToMany(Invoice, { through: 'Invoice_Product', foreignKey: 'productId' });
+Invoice.belongsToMany(Product, { through: Invoice_Product });
+Product.belongsToMany(Invoice, { through: Invoice_Product });
 
 Invoice_Product.sync({ alter: true });
 
