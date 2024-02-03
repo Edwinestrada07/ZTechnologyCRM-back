@@ -29,21 +29,29 @@ app.get('/product', validateToken, async (req, res) => {
 })
 
 app.get('/product/:id', validateToken, async (req, res) => {
-    const product = await Product.findOne({
-        where: {
-            status: "ACTIVE",
-            id: req.params.id  
-        }
-    })
-
-    if ( !product ) {
-        return res.status(200).json({
-            msg: `El producto con el siguiente id ${ req.params.id }, no existe`
+    
+    if (!req.params.id) {
+        return res.status(400).json({
+            msg: "ID de producto no proporcionado"
         });
     }
 
-    res.send(product); 
+    const product = await Product.findOne({
+        where: {
+            status: "ACTIVE",
+            id: req.params.id
+        }
+    })
+
+    if (!product) {
+        return res.status(200).json({
+            msg: `El producto con el siguiente id ${req.params.id}, no existe`
+        });
+    }
+
+    res.send(product);
 })
+
 
 app.post('/product', validateToken, async (req, res) => {
     const product = await Product.create(req.body); 

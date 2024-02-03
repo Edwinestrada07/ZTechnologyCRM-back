@@ -47,7 +47,7 @@ app.get('/user/:id', validateToken, async (req, res) => {
     res.send(user)
 })
 
-app.post('/user', async (req, res) => {
+app.post('/user', validateToken, async (req, res) => {
     const user = await User.create(req.body)
     user.save()
 
