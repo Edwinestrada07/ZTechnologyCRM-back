@@ -4,8 +4,8 @@ import AuthRouter from './auth/auth.js'
 import ClientRouter from './client/client.js'
 import ProductRouter from './product/product.js'
 import UserRouter from './user/user.js'
-import InvoiceRouter from './invoice/invoice.js'
-import Invoice_Product from './invoice_product/invoice_product.model.js' 
+import QuoteRouter from './quote/quote.js'
+
 
 const app = express()
 
@@ -16,8 +16,7 @@ app.use(AuthRouter);
 app.use(ClientRouter)
 app.use(ProductRouter)
 app.use(UserRouter)
-app.use(InvoiceRouter)
-app.use(Invoice_Product)
+app.use(QuoteRouter)
 
 app.listen(4000);
 
