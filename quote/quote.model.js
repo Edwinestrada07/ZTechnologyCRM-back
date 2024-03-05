@@ -12,6 +12,7 @@ Quote.init({
     price: DataTypes.FLOAT,
     description: DataTypes.TEXT,
     subtotal: DataTypes.FLOAT,
+    shippingPrice: DataTypes.FLOAT,
     total: DataTypes.FLOAT,
     status: {
         type: DataTypes.ENUM(['ACTIVE', 'DELETE']), 
