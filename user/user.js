@@ -75,4 +75,30 @@ app.delete('/user/:id', validateToken, async (req, res) => {
     res.send({ status: "success"})
 })
 
+// Ruta para cambiar la contraseña del usuario
+app.put('/user/change-password', validateToken, async (req, res) => {
+    try {
+        const userId = req.user.id
+        const { password, newPassword } = req.body
+        const user = await User.findByPk(userId)
+
+        if (!user) {
+          return res.status(404).json({ message: 'Usuario no encontrado' })
+        }
+
+        if (password !== user.password) {
+          return res.status(400).json({ message: 'La contraseña actual es incorrecta' })
+        }
+
+        user.password = newPassword
+        await user.save()
+
+        res.json({ status: 'success' })
+
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ message: 'Hubo un error al cambiar la contraseña' })
+    }
+})
+
 export default app
