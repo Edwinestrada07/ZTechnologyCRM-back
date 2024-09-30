@@ -1,10 +1,10 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../connect.js";
-//import User from "../user/user.model.js"
+import User from "../user/user.model.js";
 
 class Client extends Model {
     getPasswordEncrypt() {
-        return this.password; 
+        return this.password;
     }
 }
 
@@ -22,9 +22,9 @@ Client.init({
     modelName: 'Client'
 });
 
-//Relations (Un cliente pertenece a un usuario)
-/*Client.belongsTo(User)
-User.hasMany(Client)*/
+// Relaciones (Un cliente pertenece a un usuario)
+Client.belongsTo(User, { foreignKey: 'userId', allowNull: false });
+User.hasMany(Client, { foreignKey: 'userId', allowNull: false });
 
 Client.sync({ alter: true });
 
